@@ -107,6 +107,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     private Spinner spinner;
     DriverProvider driverProvider;
     private DatabaseReference mdatabase;
+    private DatabaseReference mdatabase1;
 
     String empresa_uno;
 
@@ -176,7 +177,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    empresa_uno= Objects.requireNonNull(snapshot.getValue(Driver.class)).toString();
+                    empresa_uno= snapshot.child("g").getValue().toString();
+                    Toast.makeText(MapClientActivity.this, "Empresa:"+empresa_uno, Toast.LENGTH_SHORT).show();
                 }
                 /*for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     Driver driver = snapshot1.getValue(Driver.class);
@@ -330,6 +332,19 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons8_personas_en_coche__vista_lateral_60)));
                 marker.setTag(key);
 
+                /*driverProvider.getDriver(key).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            empresa_uno= Objects.requireNonNull(snapshot.getValue()).toString();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });*/
 
 
                 //mDriversMarker.add(marker);

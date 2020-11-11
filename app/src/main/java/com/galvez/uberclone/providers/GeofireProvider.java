@@ -12,7 +12,7 @@ public class GeofireProvider {
     private DatabaseReference databaseReference;
     private GeoFire mGeofire;
     public GeofireProvider(){
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("active_drivers").child("empresa");
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("active_drivers");
         mGeofire=new GeoFire(databaseReference);
     }
     public void saveLocation(String idDriver, LatLng latLng){
