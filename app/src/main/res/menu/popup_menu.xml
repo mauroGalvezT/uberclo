@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ruta1"
+        android:title="Ruta 1"/>
+    <item
+        android:id="@+id/ruta2"
+        android:title="Ruta 2"/>
+    <item
+        android:id="@+id/ruta3"
+        android:title="Ruta 3"/>
+    <item
+        android:id="@+id/ruta4"
+        android:title="Ruta 4"/>
+
+</menu>
