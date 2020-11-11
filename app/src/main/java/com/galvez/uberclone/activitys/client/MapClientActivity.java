@@ -63,6 +63,7 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,6 +109,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     DriverProvider driverProvider;
     private DatabaseReference mdatabase;
     private DatabaseReference mdatabase1;
+    FirebaseAuth mAuth;
+
 
     String empresa_uno;
 
@@ -158,7 +161,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         authProvider = new AuthProvider();
         mdatabase= FirebaseDatabase.getInstance().getReference();
         driverProvider=new DriverProvider();
-
+        mAuth = FirebaseAuth.getInstance();
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         }
@@ -177,8 +180,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    empresa_uno= snapshot.child("g").getValue().toString();
-                    Toast.makeText(MapClientActivity.this, "Empresa:"+empresa_uno, Toast.LENGTH_SHORT).show();
+                    empresa_uno= mAuth.getCurrentUser().getUid();
+                    Toast.makeText(MapClientActivity.this, "Empresa:"+empresa_uno, Toast.LENGTH_LONG).show();
                 }
                 /*for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     Driver driver = snapshot1.getValue(Driver.class);
