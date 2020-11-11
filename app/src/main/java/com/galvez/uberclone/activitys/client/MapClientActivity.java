@@ -162,10 +162,13 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         mdatabase= FirebaseDatabase.getInstance().getReference();
         driverProvider=new DriverProvider();
         mAuth = FirebaseAuth.getInstance();
+        empresa_uno= mAuth.getCurrentUser().getUid();
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         }
         mPLaces = Places.createClient(this);
+        Toast.makeText(this, empresa_uno, Toast.LENGTH_SHORT).show();
+
         instanciarAutocompleteDest();
         instanciarAutocompleteOrigin();
         onCameraMove();
@@ -176,12 +179,12 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         rutas.add("empresa_uno");
         rutas.add("Ruta 2");
         rutas.add("Ruta 3");
-        mdatabase.child("Drivers").addValueEventListener(new ValueEventListener() {
+        mdatabase.child("Active_drivers").child(empresa_uno).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    empresa_uno= mAuth.getCurrentUser().getUid();
-                    Toast.makeText(MapClientActivity.this, "Empresa:"+empresa_uno, Toast.LENGTH_LONG).show();
+
+                    //Toast.makeText(MapClientActivity.this, "Empresa:"+empresa_uno, Toast.LENGTH_LONG).show();
                 }
                 /*for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     Driver driver = snapshot1.getValue(Driver.class);
@@ -189,7 +192,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                     String empresa=driver.getEmpresa();
 
                 }*/
-                    Toast.makeText(MapClientActivity.this, " "+empresa_uno, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MapClientActivity.this, " "+empresa_uno, Toast.LENGTH_SHORT).show();
             }
 
             @Override
