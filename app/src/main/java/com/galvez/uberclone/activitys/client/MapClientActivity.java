@@ -110,6 +110,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     private DatabaseReference mdatabase;
     private DatabaseReference mdatabase1;
     FirebaseAuth mAuth;
+    Button btnRutas;
 
 
     String empresa_uno;
@@ -120,7 +121,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
             for (Location location : locationResult.getLocations()) {
                 if (getApplicationContext() != null) {
                     mCurrentLatlng= new LatLng(location.getLatitude(),location.getLongitude());
-                    /*if (mMarker!=null){
+                    if (mMarker!=null){
                         mMarker.remove();
                     }
                     mMarker=mMap.addMarker(new MarkerOptions().position(
@@ -128,7 +129,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                             ).title("Tu posicion")
                                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons8_marcador_40))
 
-                    );*/
+                    );
 
                     mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
@@ -163,11 +164,21 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         driverProvider=new DriverProvider();
         mAuth = FirebaseAuth.getInstance();
         empresa_uno= mAuth.getCurrentUser().getUid();
+
+        btnRutas=findViewById(R.id.btnRutas);
+        btnRutas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapClientActivity.this, SeleccionarRutaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         }
         mPLaces = Places.createClient(this);
-        Toast.makeText(this, empresa_uno, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, empresa_uno, Toast.LENGTH_SHORT).show();
 
         instanciarAutocompleteDest();
         instanciarAutocompleteOrigin();
@@ -353,7 +364,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                 });*/
 
 
-                //mDriversMarker.add(marker);
+                mDriversMarker.add(marker);
 
 
             }

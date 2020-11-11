@@ -83,6 +83,15 @@
             android:src="@drawable/icons8_marcador_40"
             android:layout_gravity="center"
         />
-
+    <Button
+        android:id="@+id/btnRutas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Rutas"
+        android:layout_gravity="bottom"
+        android:layout_margin="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorPrimaryDark"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

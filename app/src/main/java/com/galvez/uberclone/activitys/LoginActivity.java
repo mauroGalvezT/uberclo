@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.galvez.uberclone.R;
 import com.galvez.uberclone.activitys.client.MapClientActivity;
+import com.galvez.uberclone.activitys.client.SeleccionarRutaActivity;
 import com.galvez.uberclone.activitys.driver.MapDriverActivity;
 import com.galvez.uberclone.activitys.driver.RegisterDriverActivity;
 import com.galvez.uberclone.includes.MyToolbar;
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             String user=mPref.getString("user","");
                             if(user.equals("client")){
-                                Intent intent = new Intent(LoginActivity.this, MapClientActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, SeleccionarRutaActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }else if(user.equals("driver")){
